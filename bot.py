@@ -1,5 +1,7 @@
 import logging
 
+import sqlite3
+
 import random
 
 from aiogram import Bot, Dispatcher, executor, types
@@ -29,6 +31,24 @@ dp = Dispatcher(bot)
 
 @dp.message_handler(commands=['start'])
 async def welcome(message):
+    connect = sqlite3.connect('users.db')
+    cursor = connect.cursor()
+    cursor.execute("""CREATE TABLE IF NOT EXISTS login_id(
+        id INTEGER
+    )""")
+    connect.commit()
+    
+    people_id = message.chat.id
+    cursor.execute(f"SELECT id FROM login_id WHERE id = {people_id}")
+    data = cursor.fetchone()
+    
+    if data is None:
+        user_id = [message.chat.id]
+        cursor.execute("INSERT INTO login_id VALUES(?);", user_id)
+        connect.commit()
+    else:
+        pass
+    
     await message.reply("Hey!\nLet's start creating passwords!\nUse the /password command to create password.")
 
 buttons = InlineKeyboardMarkup(row_width=1).add(InlineKeyboardButton(text="Numbers🔢", callback_data="numbers"),
