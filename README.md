@@ -1,3 +1,2 @@
 # Malefice
- A bot that creating password in **Telegram**. 
- (using module **aiogram**)
+## A bot that creates random password in **Telegram**. (using module **Aiogram**)
