@@ -1,3 +1,5 @@
+#Importing Aiogram, SQLite and random modules
+
 import logging
 
 import sqlite3
@@ -10,17 +12,22 @@ from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeybo
 import config
 
 #****************PASSWORD GENERATOR*******************
+
 pas = ""
 for i in range(10):
     pas = pas + random.choice(list('1234567890'))
+
 pas1 = ""
 for i in range(10):
     pas1 = pas1 + random.choice(list('abcdefghigklmnopqrstuvyxwzABCDEFGHIGKLMNOPQRSTUVYXWZ'))
+
 pas2 = ""
 for i in range(10):
     pas2 = pas2 + random.choice(list('1234567890abcdefghigklmnopqrstuvyxwzABCDEFGHIGKLMNOPQRSTUVYXWZ'))
 
 #****************PASSWORD GENERATOR*******************
+
+#Giving a token and initializing bot and dispatcher
 
 TOKEN = (config.token)
 
@@ -28,6 +35,8 @@ logging.basicConfig(level=logging.INFO)
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
+
+#/start command (creating a table and replying to message)
 
 @dp.message_handler(commands=['start'])
 async def welcome(message):
@@ -51,9 +60,13 @@ async def welcome(message):
     
     await message.reply("Hey!\nLet's start creating passwords!\nUse the /password command to create password.")
 
+#Creating buttons with callback_data
+
 buttons = InlineKeyboardMarkup(row_width=1).add(InlineKeyboardButton(text="Numbers🔢", callback_data="numbers"),
                                                 InlineKeyboardButton(text="Letters🔠", callback_data="letters"),
                                                 InlineKeyboardButton(text="Numbers and Letters🔡🔢", callback_data="numbersandletters"))
+
+#/password command using buttons and replies (also answering to message with generated password) 
 
 @dp.message_handler(commands=['password'])
 async def password(message):
@@ -75,6 +88,7 @@ async def nums_callback(callback: types.CallbackQuery):
     await callback.message.answer(pas2)
 
 #***********DO NOT USE************
+
 """@dp.message_handler()
 async def final_password_nums(message: types.Message):
     await message.answer("Your generated password is: ")
@@ -90,7 +104,10 @@ dp.message_handler()
 async def final_password_numsandletters(message: types.Message):
     await message.answer("Your generated password is: ")
     await message.answer(pas2)"""
+
 #***********DO NOT USE************    
+
+#Starting our bot
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
