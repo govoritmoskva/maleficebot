@@ -1,9 +1,12 @@
 # Malefice
 
-A bot that creates random password in **Telegram**. (using module **Aiogram** and **SQLite**) \
-Every user who has ever used this bot will recorded to **SQLite** database
+A bot that creates random password in **Telegram**. (using module **Aiogram** and **SQLite**) 
 
 ![yo](https://github.com/vstyoma/maleficebot/blob/main/images/bot.jpg)
+# 📐Features 
+
+- Every user who has ever used this **bot** will recorded 
+- The **bot** creates random passwords with *letters* and *digits*
 # 🛠Links
 
 [SQLite documentation](https://www.sqlite.org/docs.html) \
