@@ -5,7 +5,7 @@ A bot that creates random password in **Telegram**. (using module **Aiogram** an
 ![yo](https://github.com/vstyoma/maleficebot/blob/main/images/bot.jpg)
 # 📐Features 
 
-- Every user who has ever used this **bot** will recorded 
+- Every user who has ever used this **bot** will recorded to **SQLite** database
 - The **bot** creates random passwords with *letters* and *digits*
 # 🛠Links
 
