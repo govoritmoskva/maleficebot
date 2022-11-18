@@ -2,9 +2,9 @@
 
 import logging
 
-import sqlite3
-
 import random
+from random import randint
+import sqlite3
 
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, KeyboardButton
@@ -26,6 +26,17 @@ for i in range(10):
     pas2 = pas2 + random.choice(list('1234567890abcdefghigklmnopqrstuvyxwzABCDEFGHIGKLMNOPQRSTUVYXWZ'))
 
 #****************PASSWORD GENERATOR*******************
+
+#****************COIN GENERATOR***********************
+coinlist = ''
+coin = randint(1, 2)
+if coin == 1:
+    coinlist = "Орёл / Eagle"
+if coin == 2:
+    coinlist = "Решка / Tails"
+
+#****************COIN GENERATOR***********************
+
 
 #Giving a token and initializing bot and dispatcher
 
@@ -86,6 +97,13 @@ async def nums_callback(callback: types.CallbackQuery):
 async def nums_callback(callback: types.CallbackQuery):
     await callback.message.answer(text="Ok. Your generated password is:")   
     await callback.message.answer(pas2)
+
+
+
+@dp.message_handler(commands=['coin'])
+async def welcome(message):
+    await message.answer(text="Your coin is:")
+    await message.answer(coinlist)
 
 #***********DO NOT USE************
 
