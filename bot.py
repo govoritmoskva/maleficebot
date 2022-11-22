@@ -1,9 +1,11 @@
 #Importing Aiogram, SQLite and random modules
+import requests
 
 import logging
 
 import random
 from random import randint
+
 import sqlite3
 
 from aiogram import Bot, Dispatcher, executor, types
@@ -69,7 +71,7 @@ async def welcome(message):
     else:
         pass
     
-    await message.reply("Hey!\nLet's start creating passwords!\nUse the /password command to create password.")
+    await message.reply("Hey!💥\nThis's the fun bot created by vstyoma.\n\nList of commands: \n/password - the bot generating a random password. \n/coin - the bot randomly choice eagle or tails \n/valutes - the bot shows the desired valute ")
 
 #Creating buttons with callback_data
 
@@ -104,6 +106,35 @@ async def nums_callback(callback: types.CallbackQuery):
 async def welcome(message):
     await message.answer(text="Your coin is:")
     await message.answer(coinlist)
+
+valutesbuttons = InlineKeyboardMarkup(row_width=1).add(InlineKeyboardButton(text="USD", callback_data="usdvalute"),
+                                                InlineKeyboardButton(text="EUR", callback_data="eurvalute"),
+                                                InlineKeyboardButton(text="KZT", callback_data="kztvalute"))
+
+data = requests.get('https://www.cbr-xml-daily.ru/daily_json.js').json()
+    
+USD = (data['Valute']['USD']['Value'])
+EUR = (data['Valute']['EUR']['Value'])
+KZT = (data['Valute']['KZT']['Value'])
+
+@dp.message_handler(commands="valutes")
+async def print_valutes(message):
+    await message.answer("Select the valute you would like to see:", reply_markup=valutesbuttons)
+
+@dp.callback_query_handler(text="usdvalute")
+async def nums_callback(callback: types.CallbackQuery):
+    await callback.message.answer(text="Today's price in USD is:")
+    await callback.message.answer(USD)
+
+@dp.callback_query_handler(text="eurvalute")
+async def nums_callback(callback: types.CallbackQuery):
+    await callback.message.answer(text="Today's price in EUR is:")
+    await callback.message.answer(EUR)
+
+@dp.callback_query_handler(text="kztvalute")
+async def nums_callback(callback: types.CallbackQuery):
+    await callback.message.answer(text="Today's price in KZT is:")
+    await callback.message.answer(KZT)
 
 #***********DO NOT USE************
 
