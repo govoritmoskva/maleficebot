@@ -2,7 +2,7 @@
 
 A fun bot that can create **random password**, play **eagle and tails** and **print values** in rubles in **Telegram**. (using module **Aiogram** and **SQLite**) 
 
-![yo](https://github.com/vstyoma/maleficebot/blob/main/images/bot.jpg)
+
 # 📐Features 
 
 - Every user who has ever used this **bot** will recorded to **SQLite** database
