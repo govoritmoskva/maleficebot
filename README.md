@@ -7,7 +7,8 @@ A fun bot that can create **random password**, play **eagle and tails** and **pr
 
 - Every user who has ever used this **bot** will recorded to **SQLite** database
 - The **bot** creates random passwords with *letters* and *digits*
-- The bot prints USD, EUR and KZT values 
+- The bot prints USD, EUR and KZT values
+- The bot can send a cat fact
 # 🛠Links
 
 [SQLite documentation](https://www.sqlite.org/docs.html) \
