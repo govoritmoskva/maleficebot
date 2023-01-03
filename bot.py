@@ -71,7 +71,7 @@ async def welcome(message):
     else:
         pass
     
-    await message.reply("Hey!💥\nThis's the fun bot created by vstyoma.\n\nList of commands: \n/password - the bot generating a random password. \n/coin - the bot randomly choice eagle or tails \n/valutes - the bot shows the desired valute ")
+    await message.reply("Hey!💥\nThis's the fun bot created by vstyoma.\n\nList of commands: \n/password - the bot generating a random password. \n/coin - the bot randomly choice eagle or tails \n/valutes - the bot shows the desired valute \n/catfact - the bot will send a cat fact 😺 ")
 
 #Creating buttons with callback_data
 
@@ -135,6 +135,14 @@ async def nums_callback(callback: types.CallbackQuery):
 async def nums_callback(callback: types.CallbackQuery):
     await callback.message.answer(text="Today's price in KZT is:")
     await callback.message.answer(KZT)
+
+
+
+@dp.message_handler(commands=['catfact'])
+async def get_catfact(message):
+    catfact_request = requests.get('https://meowfacts.herokuapp.com/?lang=rus').json()
+    catfact_get = (catfact_request['data'])
+    await message.answer(*catfact_get)
 
 #***********DO NOT USE************
 
